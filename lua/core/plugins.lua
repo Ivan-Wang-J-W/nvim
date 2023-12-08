@@ -188,6 +188,7 @@ require("lazy").setup({
 	{
     "kawre/leetcode.nvim",
     dependencies = {
+	--ui plugin
         "MunifTanjim/nui.nvim",
 
         -- notification plugin
