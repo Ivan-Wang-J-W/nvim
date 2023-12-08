@@ -4,7 +4,7 @@ require("leetcode").setup({
     arg = "leetcode.nvim",
 
     --@type lc.lang
-    lang = "cpp",
+    lang = "cpp","java","golang","python",
 
     cn = { -- leetcode.cn
         enabled = false, --@type boolean
