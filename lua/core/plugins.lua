@@ -184,5 +184,17 @@ require("lazy").setup({
 	},
 
 	-- See `:help lualine.txt`
+--leetcode plugin 
+	{
+    "kawre/leetcode.nvim",
+    dependencies = {
+        "MunifTanjim/nui.nvim",
 
+        -- notification plugin
+        "rcarriga/nvim-notify",
+    },
+    opts = {
+        -- configuration goes here
+    },
+}
 })
