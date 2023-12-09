@@ -1,5 +1,6 @@
 require("leetcode").setup({
 {
+        build = ":TSUpdate html",
     --@type string
     arg = "leetcode.nvim",
 
