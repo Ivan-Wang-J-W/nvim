@@ -1,6 +1,6 @@
 require("lazy").setup({
 	-- gruvbox plugin
-	{ "ellisonleao/gruvbox.nvim", priority = 1000,  config = true, opts = ... },
+	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = ... },
 
 	--telescope plugin
 	{
@@ -144,7 +144,8 @@ require("lazy").setup({
 				changedelete = { text = '~' },
 			},
 			on_attach = function(bufnr)
-				vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+				vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk,
+					{ buffer = bufnr, desc = 'Preview git hunk' })
 
 				-- don't override the built-in and fugitive keymaps
 				local gs = package.loaded.gitsigns
@@ -184,18 +185,24 @@ require("lazy").setup({
 	},
 
 	-- See `:help lualine.txt`
---leetcode plugin 
+	--leetcode plugin
 	{
-    "kawre/leetcode.nvim",
-    dependencies = {
-	--ui plugin
-        "MunifTanjim/nui.nvim",
+		{
+			"kawre/leetcode.nvim",
+			dependencies = {
+				"MunifTanjim/nui.nvim",
 
-        -- notification plugin
-        "rcarriga/nvim-notify",
-    },
-    opts = {
-        -- configuration goes here
-    },
-}
+				-- optional
+				"rcarriga/nvim-notify",
+			},
+			opts = {
+				-- configuration goes here
+			},
+		}
+	},
+	--terminal manager
+	{
+		'akinsho/toggleterm.nvim', version = "*", config = true
+	},
+
 })
