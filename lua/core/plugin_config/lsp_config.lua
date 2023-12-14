@@ -67,7 +67,6 @@ local servers = {
     },
   },
 }
-require('java').setup()
 require('lspconfig').jdtls.setup({})
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
