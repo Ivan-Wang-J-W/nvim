@@ -1,66 +1,76 @@
 require("leetcode").setup({
-{
+    {
         build = ":TSUpdate html",
-    --@type string
-    arg = "leetcode.nvim",
+        --@type string
+        arg = "leetcode.nvim",
 
-    --@type lc.lang
-    lang = "cpp","java","golang","python",
+        --@type lc.lang
+        lang = "cpp",
+        "java",
+        "golang",
+        "python",
 
-    cn = { -- leetcode.cn
-        enabled = false, --@type boolean
-        translator = true, --@type boolean
-        translate_problems = true, --@type boolean
-    },
-
-    ---@type string
-    directory = vim.fn.stdpath("data") .. "/leetcode/",
-
-    ---@type boolean
-    logging = true,
-
-    cache = {
-        update_interval = 60 * 60 * 24 * 7, --@type integer 7 days
-    },
-
-    console = {
-        open_on_runcode = true, --@type boolean
-
-        dir = "row", --@type lc.direction
-
-        size = { --@type lc.size
-            width = "90%",
-            height = "75%",
+        cn = {                     -- leetcode.cn
+            enabled = false,       --@type boolean
+            translator = true,     --@type boolean
+            translate_problems = true, --@type boolean
         },
 
-        result = {
-            size = "60%", --@type lc.size
+        ---@type string
+        directory = vim.fn.stdpath("data") .. "/leetcode/",
+
+        ---@type boolean
+        logging = true,
+
+        cache = {
+            update_interval = 60 * 60 * 24 * 7, --@type integer 7 days
         },
 
-        testcase = {
-            virt_text = true, --@type boolean
+        console = {
+            open_on_runcode = true, --@type boolean
 
-            size = "40%", --@type lc.size
+            dir = "row",        --@type lc.direction
+
+            size = {            --@type lc.size
+                width = "90%",
+                height = "75%",
+            },
+
+            result = {
+                size = "60%", --@type lc.size
+            },
+
+            testcase = {
+                virt_text = true, --@type boolean
+
+                size = "40%", --@type lc.size
+            },
         },
-    },
 
-    description = {
-        position = "left", --@type lc.position
+        description = {
+            position = "left", --@type lc.position
 
-        width = "40%", --@type lc.size
+            width = "40%", --@type lc.size
 
-        show_stats = true,--@type boolean
-    },
+            show_stats = true, --@type boolean
+        },
 
-    hooks = {
-        ---@type fun()[]
-        LeetEnter = {},
+        hooks = {
+            ---@type fun()[]
+            LeetEnter = {},
 
-        ---@type fun(question: { lang: string })[]
-        LeetQuestionNew = {},
-    },
+            ---@type fun(question: { lang: string })[]
+            LeetQuestionNew = {},
+        },
 
-    ---@type boolean
-    image_support = false, -- setting this to `true` will disable question description wrap
-}
+        ---@type boolean
+        image_support = false, -- setting this to `true` will disable question description wrap
+    }
 })
+vim.keymap.set('n', '<C-m>', [[<Cmd>Leet menu <CR>]], opts)
+vim.keymap.set('n', '<C-l>', [[<Cmd>Leet lang <CR>]], opts)
+vim.keymap.set('n', '<C-t>', [[<Cmd>Leet tabs <CR>]], opts)
+vim.keymap.set('n', '<leader>r', [[<Cmd>Leet run <CR>]], opts)
+vim.keymap.set('n', '<C-s>', [[<Cmd>Leet submit <CR>]], opts)
+vim.keymap.set('n', '<C-h>', [[<Cmd>Leet hints <CR>]], opts)
+vim.keymap.set('n', '<leader>l', [[<Cmd>Leet list <CR>]], opts)

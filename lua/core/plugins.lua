@@ -88,7 +88,7 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 	},
-	-- NOTE: plugins related to LSP
+	-- NOTE: plugins related to LSPnoti
 	--  The configuration is done below. Search for lspconfig to find it below.
 
 	{
