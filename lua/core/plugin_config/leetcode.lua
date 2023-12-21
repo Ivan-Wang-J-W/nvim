@@ -68,9 +68,9 @@ require("leetcode").setup({
     }
 })
 vim.keymap.set('n', '<C-m>', [[<Cmd>Leet menu <CR>]], opts)
-vim.keymap.set('n', '<C-l>', [[<Cmd>Leet lang <CR>]], opts)
+vim.keymap.set('n', '<leader>ll', [[<Cmd>Leet lang <CR>]], opts)
 vim.keymap.set('n', '<C-t>', [[<Cmd>Leet tabs <CR>]], opts)
 vim.keymap.set('n', '<leader>r', [[<Cmd>Leet run <CR>]], opts)
 vim.keymap.set('n', '<C-s>', [[<Cmd>Leet submit <CR>]], opts)
-vim.keymap.set('n', '<C-h>', [[<Cmd>Leet hints <CR>]], opts)
+vim.keymap.set('n', '<C-i>', [[<Cmd>Leet info <CR>]], opts)
 vim.keymap.set('n', '<leader>l', [[<Cmd>Leet list <CR>]], opts)
