@@ -1,7 +1,18 @@
 require("lazy").setup({
+	--colorschemes
 	-- gruvbox plugin
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = ... },
-
+	{
+		'AlexvZyl/nordic.nvim',
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require 'nordic'.load()
+		end
+	},
+	{
+		'sainnhe/everforest',
+		},
 	--telescope plugin
 	{
 		'nvim-treesitter/nvim-treesitter',
@@ -16,7 +27,7 @@ require("lazy").setup({
 
 	{
 		'nvim-telescope/telescope.nvim',
-		branch = '0.1.x',
+		tag = '0.1.5',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
 			--fzf finder algo which requires local dependencis to be build
