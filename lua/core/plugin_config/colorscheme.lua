@@ -1,4 +1,4 @@
-require("gruvbox").setup({
+--[[require("gruvbox").setup({
 terminal_colors = true, -- add nvim terminal colors
 undercurl = true,
 underline = true,
@@ -21,7 +21,7 @@ palette_overrides = {},
 overrides = {},
 dim_inactive = false,
 transparent_mode = false,
-})
+})--]]
 
 -- vim.cmd("colorscheme gruvbox")
 

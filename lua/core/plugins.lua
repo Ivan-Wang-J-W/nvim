@@ -1,11 +1,10 @@
 require("lazy").setup({
 	--colorschemes
 	-- gruvbox plugin
-	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = function()require 'gruvbox'.load() end},
+	{ "ellisonleao/gruvbox.nvim",  config = function()require 'gruvbox'.load() end},
 	{
 		'AlexvZyl/nordic.nvim',
 		lazy = false,
-		priority = 1000,
 		config = function()
 			require 'nordic'.load()
 		end
