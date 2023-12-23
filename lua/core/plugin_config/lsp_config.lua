@@ -91,23 +91,23 @@ mason_lspconfig.setup_handlers {
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
-local  cmp = require("cmp")
-local  luasnip = require ("luasnip")
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 local cmp_action = require('lsp-zero').cmp_action()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 require('luasnip.loaders.from_vscode').lazy_load()
- luasnip.config.setup {}
+luasnip.config.setup {}
 local lspkind = require('lspkind')
 cmp.setup {
   formatting = {
     format = lspkind.cmp_format({
-      mode = 'symbol', -- show only symbol annotations
-      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      mode = 'symbol',       -- show only symbol annotations
+      maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
       with_text = true,
       menu = {
-        buffer ="[buf]",
+        buffer = "[buf]",
         nvim_lua = "[api]",
         nvim_lsp = "[LSP]",
         path = "[path]",
@@ -115,7 +115,7 @@ cmp.setup {
       },
       -- The function below will be called before any actual modifications from lspkind
       -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-      before = function (entry, vim_item)
+      before = function(entry, vim_item)
         return vim_item
       end
     })

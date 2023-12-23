@@ -1,7 +1,7 @@
 require("lazy").setup({
 	--colorschemes
 	-- gruvbox plugin
-	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = ... },
+	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = function()require 'gruvbox'.load() end},
 	{
 		'AlexvZyl/nordic.nvim',
 		lazy = false,
@@ -11,7 +11,8 @@ require("lazy").setup({
 		end
 	},
 	{
-		'sainnhe/everforest',
+		"neanias/everforest-nvim", config = function ()require 'everforest'.load()
+		end
 	},
 	--telescope plugin
 	{
@@ -27,7 +28,7 @@ require("lazy").setup({
 
 	{
 		'nvim-telescope/telescope.nvim',
-		tag = '0.1.5',
+		branch = '0.1.x',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
 			--fzf finder algo which requires local dependencis to be build
@@ -121,24 +122,24 @@ require("lazy").setup({
 
 		-- Autocompletion
 		{
-		'hrsh7th/nvim-cmp',
-			event='InsertEnter',
-		dependencies = {
-			-- Snippet Engine & its associated nvim-cmp source
-			'L3MON4D3/LuaSnip',
-			'saadparwaiz1/cmp_luasnip',
-			--cmp from buffer
-			'hrsh7th/cmp-buffer',
-			'hrsh7th/cmp-nvim-lua',
-			'hrsh7th/cmp-path',
-			-- Adds LSP completion capabilities
-			'hrsh7th/cmp-nvim-lsp',
-			--cmd line capabilities
-			'hrsh7th/cmp-cmdline',
-			-- Adds a number of user-friendly snippets
-			'rafamadriz/friendly-snippets',
+			'hrsh7th/nvim-cmp',
+			event = 'InsertEnter',
+			dependencies = {
+				-- Snippet Engine & its associated nvim-cmp source
+				'L3MON4D3/LuaSnip',
+				'saadparwaiz1/cmp_luasnip',
+				--cmp from buffer
+				'hrsh7th/cmp-buffer',
+				'hrsh7th/cmp-nvim-lua',
+				'hrsh7th/cmp-path',
+				-- Adds LSP completion capabilities
+				'hrsh7th/cmp-nvim-lsp',
+				--cmd line capabilities
+				'hrsh7th/cmp-cmdline',
+				-- Adds a number of user-friendly snippets
+				'rafamadriz/friendly-snippets',
+			},
 		},
-	},
 		--[[	config = function()
 				-- Here is where you configure the autocompletion settings.
 				local lsp_zero = require('lsp-zero')
@@ -159,46 +160,48 @@ require("lazy").setup({
 					})
 				})
 			end--]]
-		},
+	},
 
-		-- LSP
-		{
-			'neovim/nvim-lspconfig',
-			cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
-			event = { 'BufReadPre', 'BufNewFile' },
-			dependencies = {
-				{ 'hrsh7th/cmp-nvim-lsp' },
-				{ 'williamboman/mason-lspconfig.nvim' },
-			{ 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+	-- LSP
+	{
+		'neovim/nvim-lspconfig',
+		cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
+		event = { 'BufReadPre', 'BufNewFile' },
+		dependencies = {
+			{ 'hrsh7th/cmp-nvim-lsp' },
+			{ 'williamboman/mason-lspconfig.nvim' },
+			{ 'j-hui/fidget.nvim',                tag = 'legacy', opts = {} },
 
 			-- Additional lua configuration, makes nvim stuff amazing!
 			'folke/neodev.nvim',
-			},
-			config = function()
-				-- This is where all the LSP shenanigans will live
-				local lsp_zero = require('lsp-zero')
-				lsp_zero.extend_lspconfig()
-
-				lsp_zero.on_attach(function(client, bufnr)
-					-- see :help lsp-zero-keybindings
-					-- to learn the available actions
-					lsp_zero.default_keymaps({ buffer = bufnr })
-				end)
-
-				require('mason-lspconfig').setup({
-					ensure_installed = {},
-					handlers = {
-						lsp_zero.default_setup,
-						lua_ls = function()
-							-- (Optional) Configure lua language server for neovim
-							local lua_opts = lsp_zero.nvim_lua_ls()
-							require('lspconfig').lua_ls.setup(lua_opts)
-						end,
-					}
-				})
-			end
 		},
-	
+		config = function()
+			-- This is where all the LSP shenanigans will live
+			local lsp_zero = require('lsp-zero')
+			lsp_zero.extend_lspconfig()
+
+			lsp_zero.on_attach(function(client, bufnr)
+				-- see :help lsp-zero-keybindings
+				-- to learn the available actions
+				lsp_zero.default_keymaps({ buffer = bufnr })
+			end)
+
+			require('mason-lspconfig').setup({
+				ensure_installed = {
+					'clangd', 'jdtls', 'gopls'
+				},
+				handlers = {
+					lsp_zero.default_setup,
+					lua_ls = function()
+						-- (Optional) Configure lua language server for neovim
+						local lua_opts = lsp_zero.nvim_lua_ls()
+						require('lspconfig').lua_ls.setup(lua_opts)
+					end,
+				}
+			})
+		end
+	},
+
 	--[[{
 		-- LSP Configuration & Plugins
 		'neovim/nvim-lspconfig',

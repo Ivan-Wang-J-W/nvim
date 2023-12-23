@@ -2,7 +2,7 @@
 -- See `:help cmp`
 local  cmp = require("cmp")
 local  luasnip = require ("luasnip")
-local cmp_action = require('lsp-zero').cmp_action()
+local cmp_action = require('lsp-zero').cmp_action
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 require('luasnip.loaders.from_vscode').lazy_load()

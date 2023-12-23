@@ -1,4 +1,4 @@
---[[require("gruvbox").setup({
+require("gruvbox").setup({
 terminal_colors = true, -- add nvim terminal colors
 undercurl = true,
 underline = true,
@@ -17,15 +17,16 @@ invert_tabline = false,
 invert_intend_guides = false,
 inverse = true, -- invert background for search, diffs, status lines and errors
 contrast = "", -- "hard/soft" or "empty"
-palette_pverrides = {},
+palette_overrides = {},
 overrides = {},
 dim_inactive = false,
 transparent_mode = false,
-})--]]
+})
+
+-- vim.cmd("colorscheme gruvbox")
 
 
-
---[[require("nordic").setup({
+--[[ require("nordic").setup({ 
 terminal_colors = true, -- add nvim terminal colors
 undercurl = true,
 underline = true,
@@ -90,10 +91,14 @@ transparent_mode = false,
         -- Enables dark background for treesitter-context window
         dark_background = true,
     }
-})
---]]
+})--]]
+-- vim.cmd("colorscheme nordic")
+
+
+
+require("everforest").setup({
+      -- Your config here
+    background = "hard",
+    })
 vim.g.everforest_background = 'hard'
-vim.o.background = "dark" -- or "light" for light mode
---vim.cmd("colorscheme nordic")
 vim.cmd("colorscheme everforest")
---vim.cmd("colorscheme gruvbox")
