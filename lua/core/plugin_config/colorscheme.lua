@@ -100,5 +100,4 @@ require("everforest").setup({
       -- Your config here
     background = "hard",
     })
-vim.g.everforest_background = 'hard'
 vim.cmd("colorscheme everforest")
