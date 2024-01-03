@@ -48,6 +48,8 @@ require("lazy").setup({
 		config = function()
 			require("telescope").load_extension "frecency"
 		end,
+		lazy = true,
+		event = "InsertEnter",
 		vim.keymap.set("n", "<leader>tf", "<Cmd>Telescope frecency<CR>")
 	},
 	{
@@ -201,24 +203,6 @@ require("lazy").setup({
 		end
 	},
 
-	--[[{
-		-- LSP Configuration & Plugins
-		'neovim/nvim-lspconfig',
-		dependencies = {
-			-- Automatically install LSPs to stdpath for neovim
-			{ 'williamboman/mason.nvim', config = true },
-			'williamboman/mason-lspconfig.nvim',
-			'neovim/nvim-lspconfig',
-
-			-- Useful status updates for LSP, bottom right
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{ 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
-
-			-- Additional lua configuration, makes nvim stuff amazing!
-			'folke/neodev.nvim',
-		},
-	},
---]]
 
 	--pictogram for lsp
 	{ 'onsails/lspkind.nvim' },
@@ -282,6 +266,7 @@ require("lazy").setup({
 	{
 		{
 			"kawre/leetcode.nvim",
+			lazy= true,
 			dependencies = {
 				"MunifTanjim/nui.nvim",
 

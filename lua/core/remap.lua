@@ -15,8 +15,21 @@ vim.o.mouse = ''
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+--[[ vim.g.clipboard = {
+  name = 'win32yank',
+  copy = {
+     ["+"] = 'win32yank -i --crlf',
+     ["*"] = 'win32yank -i --crlf',
+   },
+  paste = {
+     ["+"] = 'win32yank -o --lf',
+     ["*"] = 'win32yank -o --lf',
+  },
+  cache_enabled = 0,
+}
 
+--]]
+ --vim.o.clipboard = 'unnamedplus'
 -- Enable break indent
 vim.o.breakindent = true
 
