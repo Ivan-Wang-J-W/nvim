@@ -26,7 +26,7 @@ transparent_mode = false,
 -- vim.cmd("colorscheme gruvbox")
 
 
---[[ require("nordic").setup({ 
+require("nordic").setup({
 terminal_colors = true, -- add nvim terminal colors
 undercurl = true,
 underline = true,
@@ -91,13 +91,13 @@ transparent_mode = false,
         -- Enables dark background for treesitter-context window
         dark_background = true,
     }
-})--]]
--- vim.cmd("colorscheme nordic")
+})--
+ vim.cmd("colorscheme nordic")
 
 
 
-require("everforest").setup({
+--[[ require("everforest").setup({
       -- Your config here
     background = "hard",
     })
-vim.cmd("colorscheme everforest")
+vim.cmd("colorscheme everforest") ]]
