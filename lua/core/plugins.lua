@@ -289,6 +289,9 @@ require("lazy").setup({
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		opts = {
+			config = function ()
+				require("telescope").load_extension "noice"
+			end
 			-- add any options here
 		},
 		dependencies = {
