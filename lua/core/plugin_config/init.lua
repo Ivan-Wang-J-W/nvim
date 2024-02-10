@@ -10,4 +10,4 @@ require("core.plugin_config.lsp_config")
 require("core.plugin_config.leetcode")
 require("core.plugin_config.toggle")
 require("core.plugin_config.dap")
-
+require("core.plugin_config.noice")

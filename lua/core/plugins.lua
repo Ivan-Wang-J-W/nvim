@@ -1,7 +1,7 @@
 require("lazy").setup({
 	--colorschemes
 	-- gruvbox plugin
-	{ "ellisonleao/gruvbox.nvim",  config = function()require 'gruvbox'.load() end},
+	{ "ellisonleao/gruvbox.nvim", config = function() require 'gruvbox'.load() end },
 	{
 		'AlexvZyl/nordic.nvim',
 		lazy = false,
@@ -10,7 +10,9 @@ require("lazy").setup({
 		end
 	},
 	{
-		"neanias/everforest-nvim", config = function ()require 'everforest'.load()
+		"neanias/everforest-nvim",
+		config = function()
+			require 'everforest'.load()
 		end
 	},
 	--telescope plugin
@@ -266,7 +268,7 @@ require("lazy").setup({
 	{
 		{
 			"kawre/leetcode.nvim",
-			lazy= true,
+			lazy = true,
 			dependencies = {
 				"MunifTanjim/nui.nvim",
 
@@ -282,4 +284,20 @@ require("lazy").setup({
 	{
 		'akinsho/toggleterm.nvim', version = "*", config = true
 	},
+	-- lazy.nvim
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		}
+	}
 })
