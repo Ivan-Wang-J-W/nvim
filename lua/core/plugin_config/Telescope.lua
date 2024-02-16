@@ -68,15 +68,22 @@ require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
-
+--git section keymaps
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
+vim.keymap.set('n', '<leader>gS', require('telescope.builtin').git_stash, { desc = 'Search [G]it [s]tash' })
+vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = 'Search [G]it [s]tatus' })
+vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = 'Search [G]it [c]ommits' })
+vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = 'Search [G]it [B]anches' })
+
+
+
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>ss', function() require( 'telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') }) end,{desc = 'search for files in the same project directory'})
 vim.keymap.set('n', '<leader>fD', function() require( 'telescope.builtin').find_files({ cwd = vim.fn.expand('~') }) end, {desc = 'search files from $HOME'})
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>hh', require('telescope.builtin').command_history, { desc = '[H]istory' })
