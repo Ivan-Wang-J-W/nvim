@@ -1,15 +1,15 @@
-
- _    _        _                               _ 
-| |  | |      | |                             | |
-| |  | |  ___ | |  ___  ___   _ __ ___    ___ | |
-| |/\| | / _ \| | / __|/ _ \ | '_ ` _ \  / _ \| |
-\  /\  /|  __/| || (__| (_) || | | | | ||  __/|_|
- \/  \/  \___||_| \___|\___/ |_| |_| |_| \___|(_)
-                                                 
+ _    _        _                               
+| |  | |      | |                              
+| |  | |  ___ | |  ___   ___   _ __ ___    ___ 
+| |/\| | / _ \| | / __| / _ \ | '_ ` _ \  / _ \
+\  /\  /|  __/| || (__ | (_) || | | | | ||  __/
+ \/  \/  \___||_| \___| \___/ |_| |_| |_| \___|
+                                               
+                                                                                                
                                                  
 ## Table of contents
-1. lua/core
-2. init.lua 
+1. [lua/core](#lua/core)
+2. [Init.lua](#Init.lua)
 
 ## lua/core
 The bulk of the configuration lies here, remaps, adding plugins, and editing their configuration.
