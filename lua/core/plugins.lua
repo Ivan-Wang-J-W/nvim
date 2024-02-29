@@ -257,7 +257,7 @@ require("lazy").setup({
 		opts = {
 			options = {
 				component_separators = '|',
-				theme = 'everforest',
+				theme = 'nordic',
 				section_separators = '',
 			},
 		},
