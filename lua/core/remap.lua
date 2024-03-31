@@ -4,6 +4,22 @@ vim.g.mapleader = " "
 -- NOTE: You can change these options as you wish!
 --remap escape key in insert mode 
 vim.keymap.set('i', 'jh', '<Esc>')
+-- fugitive keymaps 
+vim.keymap.set("n", "<space>ga", ":Git add ")
+vim.keymap.set("n", "<space>gss", ":Git status<CR>")
+vim.keymap.set ("n", " <space>gd ",":Gdiff<CR>")
+--[[
+nnoremap <space>gt :Gcommit -v -q %:p<CR> 
+nnoremap <space>ge :Gedit<CR>
+nnoremap <space>gr :Gread<CR>
+nnoremap <space>gw :Gwrite<CR><CR>
+nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <space>gp :Ggrep<Space>
+nnoremap <space>gm :Gmove<Space>
+nnoremap <space>gb :Git branch<Space>
+nnoremap <space>go :Git checkout<Space>
+nnoremap <space>gps :Dispatch! git push<CR>
+nnoremap <space>gpl :Dispatch! git pull<CR> ]]
 -- Set highlight on search
 vim.o.hlsearch = false
 
