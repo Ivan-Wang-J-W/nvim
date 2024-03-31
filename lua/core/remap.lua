@@ -2,7 +2,8 @@ vim.g.mapleader = " "
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
-
+--remap escape key in insert mode 
+vim.keymap.set('i', 'jh', '<Esc>')
 -- Set highlight on search
 vim.o.hlsearch = false
 
