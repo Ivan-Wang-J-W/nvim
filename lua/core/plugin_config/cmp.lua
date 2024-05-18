@@ -70,7 +70,7 @@ cmp.setup {
     { name = "nvim_lua" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "buffer",  keyword_length = 7 },
+    { name = "buffer",  keyword_length = 4 },
     { name = "path" },
 
   }
@@ -82,6 +82,12 @@ cmp.setup.cmdline({ '/', '?' }, {
     { name = 'buffer' }
   }
 
+})
+cmp.setup.filetype({"mysql"},{
+  sources = {
+    {name ="vim-dadbod-completion"},
+    {name = "buffer"},
+  }
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
