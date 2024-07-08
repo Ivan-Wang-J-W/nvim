@@ -15,6 +15,12 @@ require("lazy").setup({
 			require 'everforest'.load()
 		end
 	},
+	{
+
+		"ptdewey/darkearth-nvim",
+		priority = 1000,
+
+	},
 	--telescope plugin
 	{
 		'nvim-treesitter/nvim-treesitter',
@@ -68,26 +74,26 @@ require("lazy").setup({
 	'tpope/vim-rhubarb',
 	-- Detect tabstop and shiftwidth automatically
 	'tpope/vim-sleuth',
-	--sql 
+	--sql
 	'tpope/vim-dadbod',
-	--sql completion and ui 
+	--sql completion and ui
 	{
-  'kristijanhusak/vim-dadbod-ui',
-  dependencies = {
-    { 'tpope/vim-dadbod', lazy = true },
-    { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
-  },
-  cmd = {
-    'DBUI',
-    'DBUIToggle',
-    'DBUIAddConnection',
-    'DBUIFindBuffer',
-  },
-  init = function()
-    -- Your DBUI configuration
-    vim.g.db_ui_use_nerd_fonts = 1
-  end,
-},
+		'kristijanhusak/vim-dadbod-ui',
+		dependencies = {
+			{ 'tpope/vim-dadbod',                     lazy = true },
+			{ 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+		},
+		cmd = {
+			'DBUI',
+			'DBUIToggle',
+			'DBUIAddConnection',
+			'DBUIFindBuffer',
+		},
+		init = function()
+			-- Your DBUI configuration
+			vim.g.db_ui_use_nerd_fonts = 1
+		end,
+	},
 	--vim wiki
 	'vimwiki/vimwiki',
 
@@ -262,7 +268,7 @@ require("lazy").setup({
 			})
 		end
 	},
-	{ "folke/neodev.nvim", opts = {} },
+	{ "folke/neodev.nvim",    opts = {} },
 
 
 	--pictogram for lsp
@@ -282,7 +288,6 @@ require("lazy").setup({
 				changedelete = { text = '~' },
 			},
 			on_attach = function(bufnr)
-
 				-- don't override the built-in and fugitive keymaps
 				local gs = package.loaded.gitsigns
 				vim.keymap.set({ 'n', 'v' }, ']c', function()
