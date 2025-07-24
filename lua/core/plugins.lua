@@ -205,69 +205,43 @@ require("lazy").setup({
 			'folke/neodev.nvim',
 		},
 		config = function()
-			-- This is where all the LSP shenanigans will live
-			local lsp_zero = require('lsp-zero')
-			lsp_zero.extend_lspconfig()
-
-			lsp_zero.on_attach(function(client, bufnr)
-				-- see :help lsp-zero-keybindings
-				-- to learn the available actions
-				lsp_zero.default_keymaps({ buffer = bufnr })
-			end)
 
 			require('mason-lspconfig').setup({
 				ensure_installed = {
 					'clangd', 'jdtls', 'gopls'
-				},
-				handlers = {
-					lsp_zero.default_setup,
-					lua_ls = function()
-						-- (Optional) Configure lua language server for neovim
-						-- local lua_opts = lsp_zero.nvim_lua_ls()
-						-- require('lspconfig').lua_ls.setup(lua_opts)
-						require 'lspconfig'.lua_ls.setup {
-							on_init = function(client)
-								local path = client.workspace_folders[1].name
-								if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-									return
-								end
-
-								client.config.settings.Lua = vim.tbl_deep_extend('force',
-									client.config.settings.Lua, {
-										runtime = {
-											-- Tell the language server which version of Lua you're using
-											-- (most likely LuaJIT in the case of Neovim)
-											version = 'LuaJIT'
-										},
-										-- Make the server aware of Neovim runtime files
-										workspace = {
-											checkThirdParty = false,
-											library = {
-												vim.env.VIMRUNTIME
-												-- Depending on the usage, you might want to add additional paths here.
-												-- "${3rd}/luv/library"
-												-- "${3rd}/busted/library",
-											}
-											-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-											-- library = vim.api.nvim_get_runtime_file("", true)
-										}
-									})
-							end,
-							settings = {
-								Lua = {
-									diagnostics = {
-										-- Get the language server to recognize the `vim` global
-										globals = { 'vim' },
-									},
-
-								}
-							}
-						}
-					end,
 				}
 			})
-		end
-	},
+		-- in nvim 11 onwards, lua lspconfig deprecated, will use vim.enable and vim.lsp.config. lsp_zero is also deprecated. 
+		vim.lsp.enable('clangd','lua_ls','jdtls','gopls')
+		--diagnostics
+
+vim.diagnostic.config({
+    virtual_lines = true,
+    -- virtual_text = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+        border = "rounded",
+        source = true,
+    },
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "󰅚 ",
+            [vim.diagnostic.severity.WARN] = "󰀪 ",
+            [vim.diagnostic.severity.INFO] = "󰋽 ",
+            [vim.diagnostic.severity.HINT] = "󰌶 ",
+        },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+            [vim.diagnostic.severity.WARN] = "WarningMsg",
+        },
+    },
+})
+		end,
+			},
+			
+
 	{ "folke/neodev.nvim",    opts = {} },
 
 
