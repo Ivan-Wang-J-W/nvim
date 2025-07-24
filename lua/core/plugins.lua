@@ -133,17 +133,6 @@ require("lazy").setup({
 	--  The configuration is done below. Search for lspconfig to find it below.
 	{
 		{
-			'VonHeikemen/lsp-zero.nvim',
-			branch = 'v3.x',
-			lazy = true,
-			config = false,
-			init = function()
-				-- Disable automatic setup, we are doing it manually
-				vim.g.lsp_zero_extend_cmp = 0
-				vim.g.lsp_zero_extend_lspconfig = 0
-			end,
-		},
-		{
 			'williamboman/mason.nvim',
 			lazy = false,
 			config = true,
@@ -169,26 +158,6 @@ require("lazy").setup({
 				'rafamadriz/friendly-snippets',
 			},
 		},
-		--[[	config = function()
-				-- Here is where you configure the autocompletion settings.
-				local lsp_zero = require('lsp-zero')
-				lsp_zero.extend_cmp()
-
-				-- And you can configure cmp even more, if you want to.
-				local cmp = require('cmp')
-				local cmp_action = lsp_zero.cmp_action()
-
-				cmp.setup({
-					formatting = lsp_zero.cmp_format(),
-					mapping = cmp.mapping.preset.insert({
-						['<C-Space>'] = cmp.mapping.complete(),
-						['<C-u>'] = cmp.mapping.scroll_docs(-4),
-						['<C-d>'] = cmp.mapping.scroll_docs(4),
-						['<C-f>'] = cmp_action.luasnip_jump_forward(),
-						['<C-b>'] = cmp_action.luasnip_jump_backward(),
-					})
-				})
-			end--]]
 	},
 
 	-- LSP
@@ -199,50 +168,58 @@ require("lazy").setup({
 		dependencies = {
 			{ 'hrsh7th/cmp-nvim-lsp' },
 			{ 'williamboman/mason-lspconfig.nvim' },
-			{ 'j-hui/fidget.nvim',                tag = 'legacy', opts = {} },
+			{ 'j-hui/fidget.nvim',                opts = {} },
+			{
+				--neodev deprecated, use lazydev
+				"folke/lazydev.nvim",
+				ft = "lua", -- only load on lua files
+				opts = {
+					library = {
+						-- See the configuration section for more details
+						-- Load luvit types when the `vim.uv` word is found
+						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+					},
+				},
+			},
 
 			-- Additional lua configuration, makes nvim stuff amazing!
-			'folke/neodev.nvim',
+			config = function()
+				require('mason-lspconfig').setup({
+					ensure_installed = {
+						'clangd', 'jdtls', 'gopls'
+					}
+				})
+				-- in nvim 11 onwards, lua lspconfig deprecated, will use vim.enable and vim.lsp.config. lsp_zero is also deprecated.
+				--diagnostics
+
+				vim.diagnostic.config({
+					virtual_lines = true,
+					-- virtual_text = true,
+					underline = true,
+					update_in_insert = false,
+					severity_sort = true,
+					float = {
+						border = "rounded",
+						source = true,
+					},
+					signs = {
+						text = {
+							[vim.diagnostic.severity.ERROR] = "󰅚 ",
+							[vim.diagnostic.severity.WARN] = "󰀪 ",
+							[vim.diagnostic.severity.INFO] = "󰋽 ",
+							[vim.diagnostic.severity.HINT] = "󰌶 ",
+						},
+						numhl = {
+							[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+							[vim.diagnostic.severity.WARN] = "WarningMsg",
+						},
+					},
+				})
+			end,
 		},
-		config = function()
+	},
 
-			require('mason-lspconfig').setup({
-				ensure_installed = {
-					'clangd', 'jdtls', 'gopls'
-				}
-			})
-		-- in nvim 11 onwards, lua lspconfig deprecated, will use vim.enable and vim.lsp.config. lsp_zero is also deprecated. 
-		vim.lsp.enable('clangd','lua_ls','jdtls','gopls')
-		--diagnostics
 
-vim.diagnostic.config({
-    virtual_lines = true,
-    -- virtual_text = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-    float = {
-        border = "rounded",
-        source = true,
-    },
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = "󰅚 ",
-            [vim.diagnostic.severity.WARN] = "󰀪 ",
-            [vim.diagnostic.severity.INFO] = "󰋽 ",
-            [vim.diagnostic.severity.HINT] = "󰌶 ",
-        },
-        numhl = {
-            [vim.diagnostic.severity.ERROR] = "ErrorMsg",
-            [vim.diagnostic.severity.WARN] = "WarningMsg",
-        },
-    },
-})
-		end,
-			},
-			
-
-	{ "folke/neodev.nvim",    opts = {} },
 
 
 	--pictogram for lsp
@@ -251,6 +228,54 @@ vim.diagnostic.config({
 	{ 'folke/which-key.nvim', opts = {} },
 	{
 		-- Adds git related signs to the gutter, as well as utilities for managing changes
+		'lewis6991/gitsigns.nvim',
+		opts = {
+			-- See `:help gitsigns.txt`
+			signs = {
+				add = { text = '+' },
+				change = { text = '~' },
+				delete = { text = '_' },
+				topdelete = { text = '‾' },
+				changedelete = { text = '~' },
+			},
+			on_attach = function(bufnr)
+				-- don't override the built-in and fugitive keymaps
+				local gs = package.loaded.gitsigns
+				vim.keymap.set({ 'n', 'v' }, ']c', function()
+					if vim.wo.diff then return ']c' end
+					vim.schedule(function() gs.next_hunk() end)
+					return '<Ignore>'
+				end, { expr = true, buffer = bufnr, desc = "Jump to next hunk" })
+				vim.keymap.set({ 'n', 'v' }, '[c', function()
+					if vim.wo.diff then return '[c' end
+					vim.schedule(function() gs.prev_hunk() end)
+					return '<Ignore>'
+				end, { expr = true, buffer = bufnr, desc = "Jump to previous hunk" })
+			end,
+		},
+	},
+	--auto pair plugin
+	{
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		opts = {} -- this is equalent to setup({}) function
+	},
+
+	{
+		-- Set lualine as statusline
+		'nvim-lualine/lualine.nvim',
+		dependencies = {
+			'nvim-tree/nvim-web-devicons', opt = true
+		},
+		opts = {
+			options = {
+				component_separators = '|',
+				theme = 'nordic',
+				section_separators = '',
+			},
+		},
+	},
+	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		'lewis6991/gitsigns.nvim',
 		opts = {
 			-- See `:help gitsigns.txt`
