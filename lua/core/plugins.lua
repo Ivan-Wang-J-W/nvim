@@ -117,7 +117,7 @@ require("lazy").setup({
 		ft = { "markdown", "md" }
 	},
 	-- leap plugin
-	'ggandor/leap.nvim',
+	'https://codeberg.org/andyg/leap.nvim',
 	dependencies = {
 		'tpope/vim-repeat',
 	},
