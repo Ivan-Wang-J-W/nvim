@@ -145,6 +145,7 @@ require("lazy").setup({
 			dependencies = {
 				-- Snippet Engine & its associated nvim-cmp source
 				'L3MON4D3/LuaSnip',
+				run = "make install_jsregexp",
 				'saadparwaiz1/cmp_luasnip',
 				--cmp from buffer
 				'hrsh7th/cmp-buffer',
